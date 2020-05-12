@@ -1,12 +1,29 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import { HomeComponent } from "./components/home-component";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { DepartmentComponent } from "./components/department-component";
+import { EmployeeComponent } from "./components/employee-component";
+import { NavigationMenuComponent } from "./components/navigation-menu-component";
 
 function App() {
   return (
-    <div className="App">
-      <h2>Hello World</h2>
-    </div>
+    <BrowserRouter>
+      <div className="container">
+        <h3 className="m-3 d-flex justify-content-center">
+          React JS with API demo
+        </h3>
+        <h5 className="m-3 d-flex justify-content-center">
+          Employee Management Portal
+        </h5>
+        <NavigationMenuComponent />
+        <Switch>
+          <Route path="/" component={HomeComponent} exact />
+          <Route path="/department" component={DepartmentComponent} exact />
+          <Route path="/employee" component={EmployeeComponent} exact />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
