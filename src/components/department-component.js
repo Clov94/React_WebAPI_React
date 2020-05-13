@@ -1,11 +1,16 @@
 import React from "react";
 import { Table, ButtonToolbar, Button } from "react-bootstrap";
 import { AddDepartmentComponent } from "./add-department.component";
+import { EditDepartmentComponent } from "./edit-department.component";
 
 export class DepartmentComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { departments: [], addModalShow: false };
+    this.state = {
+      departments: [],
+      addModalShow: false,
+      editModalShow: false,
+    };
   }
 
   componentDidMount() {
@@ -23,7 +28,13 @@ export class DepartmentComponent extends React.Component {
   }
 
   render() {
-    const { departments, addModalShow } = this.state;
+    const {
+      departments,
+      addModalShow,
+      editModalShow,
+      depId,
+      depName,
+    } = this.state;
     // let toCloseModal = () => this.setState({ addModalShow: true });
     return (
       <div>
@@ -32,6 +43,7 @@ export class DepartmentComponent extends React.Component {
             <tr>
               <th>DepartmentID</th>
               <th>DepartmentName</th>
+              <th>Option</th>
             </tr>
           </thead>
           <tbody>
@@ -39,6 +51,29 @@ export class DepartmentComponent extends React.Component {
               <tr key={DepartmentID}>
                 <td>{DepartmentID}</td>
                 <td>{DepartmentName}</td>
+                <td>
+                  <ButtonToolbar>
+                    <Button
+                      className="mr-2"
+                      variant="info"
+                      onClick={() =>
+                        this.setState({
+                          editModalShow: true,
+                          depId: DepartmentID,
+                          depName: DepartmentName,
+                        })
+                      }
+                    >
+                      Edit
+                    </Button>
+                    <EditDepartmentComponent
+                      onShow={editModalShow}
+                      onHide={() => this.setState({ editModalShow: false })}
+                      depId={depId}
+                      depName={depName}
+                    />
+                  </ButtonToolbar>
+                </td>
               </tr>
             ))}
           </tbody>
