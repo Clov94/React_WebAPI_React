@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, ButtonToolbar, Button } from "react-bootstrap";
-import { AddDepartmentComponent } from "./add-department.component";
-import { EditDepartmentComponent } from "./edit-department.component";
+import { EditDepartmentComponent } from "./department-actions/edit-department.component";
+import { AddDepartmentComponent } from "./department-actions/add-department.component";
 
 export class DepartmentComponent extends React.Component {
   constructor(props) {

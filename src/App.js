@@ -2,9 +2,9 @@ import React from "react";
 import "./App.css";
 import { HomeComponent } from "./components/home-component";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { DepartmentComponent } from "./components/department-component";
-import { EmployeeComponent } from "./components/employee-component";
 import { NavigationMenuComponent } from "./components/navigation-menu-component";
+import { DepartmentComponent } from "./components/sections/department-component";
+import { EmployeeComponent } from "./components/sections/employee-component";
 
 function App() {
   return (

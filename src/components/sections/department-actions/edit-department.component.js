@@ -38,9 +38,11 @@ export const EditDepartmentComponent = ({ onShow, onHide, depId, depName }) => {
       .then(
         (result) => {
           setSnackBar({ snackBarOpen: true, snackBarMsg: result });
+          setTimeout(90000);
         },
         (error) => {
           setSnackBar({ snackBarOpen: true, snackBarMsg: `${error} / error` });
+          setTimeout(90000);
         }
       );
   };
