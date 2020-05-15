@@ -2,6 +2,7 @@ import React from "react";
 import { Table, ButtonToolbar, Button } from "react-bootstrap";
 import { EditDepartmentComponent } from "./department-actions/edit-department.component";
 import { AddDepartmentComponent } from "./department-actions/add-department.component";
+import { DeleteDepartmentComponent } from "./department-actions/delete-department.component";
 
 export class DepartmentComponent extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export class DepartmentComponent extends React.Component {
       departments: [],
       addModalShow: false,
       editModalShow: false,
+      deleteModalShow: false,
     };
   }
 
@@ -22,20 +24,27 @@ export class DepartmentComponent extends React.Component {
       .then((response) => response.json())
       .then((data) => this.setState({ departments: data }));
   }
-
-  componentDidUpdate() {
-    this.refreshList();
-  }
+  // deleteDepartment(depId) {
+  //   alert(depId);
+  //   fetch("http://localhost:52725/api/department/" + depId, {
+  //     method: "DELETE",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  // }
 
   render() {
     const {
       departments,
       addModalShow,
       editModalShow,
+      deleteModalShow,
       depId,
       depName,
     } = this.state;
-    // let toCloseModal = () => this.setState({ addModalShow: true });
+
     return (
       <div>
         <Table className="mt-4" striped bordered hover size="sm">
@@ -52,7 +61,7 @@ export class DepartmentComponent extends React.Component {
                 <td>{DepartmentID}</td>
                 <td>{DepartmentName}</td>
                 <td>
-                  <ButtonToolbar>
+                  <ButtonToolbar style={{ float: "left" }}>
                     <Button
                       className="mr-2"
                       variant="info"
@@ -66,9 +75,33 @@ export class DepartmentComponent extends React.Component {
                     >
                       Edit
                     </Button>
+
                     <EditDepartmentComponent
                       onShow={editModalShow}
                       onHide={() => this.setState({ editModalShow: false })}
+                      depId={depId}
+                      depName={depName}
+                    />
+                  </ButtonToolbar>
+
+                  <ButtonToolbar>
+                    <Button
+                      className="mr-2"
+                      variant="danger"
+                      onClick={() =>
+                        // () => deleteDepartment(depId)
+                        this.setState({
+                          deleteModalShow: true,
+                          depId: DepartmentID,
+                          depName: DepartmentName,
+                        })
+                      }
+                    >
+                      Delete
+                    </Button>
+                    <DeleteDepartmentComponent
+                      onShow={deleteModalShow}
+                      onHide={() => this.setState({ deleteModalShow: false })}
                       depId={depId}
                       depName={depName}
                     />
@@ -87,7 +120,7 @@ export class DepartmentComponent extends React.Component {
           </Button>
           <AddDepartmentComponent
             onShow={addModalShow}
-            onHide={() => this.setState({ addModalShow: false })}
+            onHide={!addModalShow}
           />
         </ButtonToolbar>
       </div>

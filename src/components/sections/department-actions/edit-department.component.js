@@ -38,11 +38,9 @@ export const EditDepartmentComponent = ({ onShow, onHide, depId, depName }) => {
       .then(
         (result) => {
           setSnackBar({ snackBarOpen: true, snackBarMsg: result });
-          setTimeout(90000);
         },
         (error) => {
           setSnackBar({ snackBarOpen: true, snackBarMsg: `${error} / error` });
-          setTimeout(90000);
         }
       );
   };
@@ -52,7 +50,7 @@ export const EditDepartmentComponent = ({ onShow, onHide, depId, depName }) => {
         open={snackBar.snackBarOpen}
         autoHideDuration={3000}
         onClose={snackBarClose}
-        message={<span id="message-id">{snackBar.snackBarMsg}</span>}
+        message={<span id={`message-${depId}`}>{snackBar.snackBarMsg}</span>}
         action={[
           <IconButton
             key="close"
