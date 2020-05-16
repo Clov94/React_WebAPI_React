@@ -89,7 +89,6 @@ export class DepartmentComponent extends React.Component {
                       className="mr-2"
                       variant="danger"
                       onClick={() =>
-                        // () => deleteDepartment(depId)
                         this.setState({
                           deleteModalShow: true,
                           depId: DepartmentID,
@@ -120,7 +119,7 @@ export class DepartmentComponent extends React.Component {
           </Button>
           <AddDepartmentComponent
             onShow={addModalShow}
-            onHide={!addModalShow}
+            onHide={() => this.setState({ addModalShow: false })}
           />
         </ButtonToolbar>
       </div>
